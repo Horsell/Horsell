@@ -1,0 +1,320 @@
+# .even? return un booleen "true "si l'entier est une valeur paire.
+# .odd? retourn un booleen "true" si l'entier est une valeur impaire.
+# %w => raccourci pour creer un tableau rapidement Ex: %w(maison ecole voiture) = ["maison", "ecole", "voiture"]
+# Operation ternaire,  Ex: 
+message = 20
+puts message = number > 0 ? "Superieur" : "inferieur"
+
+switch/case :
+
+month = 2
+
+ca
+
+
+
+==============
+Condition.
+==============
+puts "Quelle heure est il ?"
+print "> "
+heure = gets.chomp.to_i
+
+heure = 12
+
+def is_open?(hour)
+  if hour >= 9 && hour < 19
+    "On est ouvert"
+  else
+    "On est fermé"
+  end
+end
+
+puts is_open?(heure)
+
+
+==============
+Boucle
+==============
+
+for i in ["a", "b", "c"] #lorsque c'est un array
+  puts "valeur de i : #{i}"
+end
+
+
+for i in (1..10) # lorsque c'est un range >> Le range (1...10) ira de 1 a 9, La manip est identique pour les lettres.
+  puts "valeur de i : #{i}"
+end
+
+
+Astuce : Pour boucler sur un tableau avec la boucle for :
+> a = ["maison", "paul", "valerie"] 
+for i in (0..(a.length))
+  puts a[i]
+end
+>> Elle affichera : "maison", "paul", "valerie"
+===========
+array
+==========
+
+month = []
+pour rajouter un element dans un tableau : month << "mai", la chaine "mai" sera inseré dans le tableau.
+pour supprimer un element dans un tableau : month.delete("mai") ou month.delete_at(0) supprimera la valeur au tableau du rang 0.
+
+
+
+VARIABLE GLOBAL = Une variable global peut se definir en editant la variable en majuscule. 
+EX : VARIABLE = 0 >> Elle pourra donc etre visible sur l'ensemble du code.
+
+
+
+
+
+==============
+iterator
+==============
+Ressource : la doc de Rubydoc, Array.html et enumerable.hfml
+a = ["fleur", "yannic", "voiture"]
+a.each { |prenom| puts prenom }
+Resultat : "fleur", "yannic", "voiture"
+
+Each :
+musicians = ['Jimmy Page', 'Robert Plant', 'John Paul Jones', 'John bonam']
+musicians.each { |i| puts i }
+resultat : Jimmy Page Robert Plant John Paul Jones John bonam
+
+Each_with_index
+musicians = ['Jimmy Page', 'Robert Plant', 'John Paul Jones', 'John bonam']
+musicians.each_with_index { |i| puts i }
+resultat : 0-Jimmy Page 1-Robert Plant 2-John Paul Jones 3-John bonam
+
+Pour faire un upcase au lieu de faire cette manip 
+------
+musician_upcase = []
+musicians.each { |i| musician_upcase << i.upcase }
+resultat : JIMMY PAGE ROBERT PLANT jOHN PAUL JONES JOHN BONAM
+
+Utiliser ceci car map car map creer un tableau a l'interieur de sa fonction donc il ne sera pas necessaire de creer un tableau vide, il suffit simplement simplement d'introduire notre instruction dans la methode 
+------
+Map :
+musicians.map! {|i| i.upcase } 
+resultat : Tous les caracteres du tableau seront en upcase.
+
+
+count :
+count = musicians.count { |i| i.include?("o") }
+Resultat du count : 3
+
+select :  Cette fonction permet de selectionner uniquement les index qui comporte la chaine de caractère qu'on lui a defini.
+on creer une variable.
+selected_musicians = musicians.select { |i| i.include?("o") }
+Resultat : Robert Plant John Paul Jones John bonam
+
+
+===============
+Creation de bloc
+===============
+
+def timer
+  start_time = Time.now
+  yield
+  puts "Elapsed time : #{Time.now - start_time}"
+end
+
+timer do |start_time|
+  puts "Je suis une tache"
+  sleep 3
+  puts "fin de la tache"
+end
+
+>> Lors de l'execution, 'yield' sort de def pour executer le bloc qui a été défini et revient ensuite executer le reste du code. (puts "Elapsed time : #{Time.now - start_time}"
+ dans ce cas présent.)
+
+
+==============
+Hash
+=============
+
+student_ages_hash = {
+    "peter" => {
+        "age" => 24,
+        "ss" => "2000"
+    },
+    "Mary" => {
+         "age" => 25,
+         "ss" => "2000"
+    },
+    "George" => {
+          "age" => 22,
+          "ss" => "2000"
+    },
+    "Emma" => {
+          "age" => 20
+          "ss" => "2000"
+}
+
+# # student_ages_hash.each do |name, student|
+# #   puts "#{name} is #{student["age"]}"
+# end
+#   #affiche student et age
+
+puts student_ages_hash.length #affiche la longueur du tableau
+puts student_ages_hash["peter"] = 99 #change l'age de peter
+student_ages_hash.delete('Donald') #supprime la key de donald
+
+============
+Hash with Symbole
+===========
+
+L'utilisation de symbole est plus interessant car il permet de garder le meme emplacement memoire.
+
+EX d'utilisation :
+ 
+paris = {
+  :country => "France",
+  :polutation => 123456
+}
+
+puts paris[:population] Resultat : 123456
+
+
+Pour faciliter l'utilisation des symmboles dans un hash :
+paris = {
+  country: "france"
+  population: 123456
+}
+
+puts paris[:population] Resultat : 123456
+
+
+
+def display_student(name, infos)
+  puts "#{name}"
+  info.each do |info, value|
+    puts " age #{info} adresse #{value}"
+  end
+end
+
+display_student("Hector", {age: 24})
+ affichera : Hector
+              age 24
+
+display_student("Hector", {age: 24, addr: 5 rue des pins})
+  affichera : Hector
+              age 24 adresse 5 rue des pins
+
+
+
+============
+intro api json
+============
+
+require 'json'
+require 'open-uri'
+
+answer = JSON.parse(open(url du site).red)
+
+puts answer[cle du json] #les infos de l'api seront visible.
+
+==================
+Parsing & Storing
+================= 
+
+require 'csv'
+
+filepath = 'beers.csv'
+
+CSV.foreach(filepath) do |row|
+  # Here, row is an array of columns
+  puts "#{row[0]} | #{row[1]} | #{row[2]}"
+end
+
+===>> Le fichier beers.csv sera lu par la classe CSV, elle affichera sur chaque lignes tout les elements du fichier.
+
+
+require 'csv'
+
+csv_options = { col_sep: ',', quote_char: '"', headers: :first_row }
+filepath    = 'beers.csv'
+
+CSV.foreach(filepath, csv_options) do |row|
+  puts "#{row['Name']}, a #{row['Appearance']} beer from #{row['Origin']}"
+end
+
+===>> Il est possible de lui affecter des options (Ex : delimiter de quote entre chaque string, delimiter de chaque field et indication d'un header en premier ligne)
+Ne pas oublier de rentrer en parametre de la classe CSV la variable qu'on aura definie au prealable avec les options defini.
+
+
+Ruby Affiche sous forme de Hash un fichier Json lors d'un parsing.
+
+SYNTAX : 
+require 'json'
+
+filepath = 'beers.json'
+
+serialized_beers = File.read(filepath)
+
+beers = JSON.parse(serialized_beers)
+
+# => beers is a Hash
+
+
+
+SYNTAXE en storing :
+
+require 'json'
+
+beers = { beers: [
+  {
+    name:       'Edelweiss',
+    appearance: 'White',
+    origin:     'Austria'
+  },
+  {
+    name:       'Guinness',
+    appearance: 'Stout',
+    origin:     'Ireland'
+  }
+  # etc...
+]}
+
+File.open(filepath, 'w') do |file|
+  file.write(JSON.generate(beers))
+end
+
+========================
+Modeling Data
+===============
+
+Pour lever une exeception la methode Fail permet de le faire >> fail "Erreur"
+
+une deuxieme methode permet de catcher l'exception en utilisant :
+begin
+  puts room1.add_patient(ohn)
+  rescue runtimeEror => e
+  puts "Room is full #{e}"
+end
+Cette methode ce met dans app.rb
+
+dans une methode :
+def add_patient(patient)
+  if full?
+    fail "room is full"
+  else
+    @patients << patient
+  end
+end
+
+DB.execute("INSERT INTO doctors (name, age) VALUES ('John', 42)")
+DB.last_insert_row_id 
+Cete derniere action permet d'afficher l\'id de la derniere insertion effectuer pour pouvoir l\'exploiter dans le code Ruby.
+
+DB.results_as_hash = true
+executer la ligne du dessus et l'affecter a 'true' permet de recuperer une requettes dans un hash et non dans un tableau de tableau.
+
+EX : [
+#      { "name" => "John Smith", "age" => 39 , 0 => "John Smith", 1 => 39 },
+#      { "name" => "Emma Reale", "age" => 31 , 0 => "Emma Reale", 1 => 31 }
+#    ]
+
+
